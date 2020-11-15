@@ -4,6 +4,12 @@ var response = "Hello json";
 
 absolutePath = __dirname + "/views/index.html"
 
+app.use(function middleware(req, res, next) {
+  var string = req.method + " " + req.path + " - " + req.ip;
+  console.log(string)
+  next();
+});
+
 // Normal usage
 app.use(express.static(__dirname + "/public"));
 
