@@ -1,12 +1,6 @@
 var express = require('express');
 var app = express();
-var response = "Hello World";
-
-if (process.env.MESSAGE_STYLE === "uppercase") {
-  response = "Hello World".toUpperCase();
-} else {
-  response = "Hello World";
-}
+var response = "Hello json";
 
 absolutePath = __dirname + "/views/index.html"
 
@@ -14,6 +8,12 @@ absolutePath = __dirname + "/views/index.html"
 app.use(express.static(__dirname + "/public"));
 
 app.get("/json", (req, res) => {
+  if (process.env.MESSAGE_STYLE === "uppercase") {
+    response = "Hello json".toUpperCase();
+  } else {
+    response = "Hello json";
+  }
+
   res.json({
     "message": response
   });
