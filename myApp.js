@@ -4,6 +4,11 @@ var response = "Hello json";
 
 absolutePath = __dirname + "/views/index.html"
 
+const date_time = (req, res, next) => {
+  req.time = new Date().toString();
+  next();
+};
+
 app.use(function middleware(req, res, next) {
   var string = req.method + " " + req.path + " - " + req.ip;
   console.log(string)
@@ -23,6 +28,12 @@ app.get("/json", (req, res) => {
   res.json({
     "message": response
   });
+});
+
+app.get('/now', date_time, (req, res) => {
+  res.send({
+    time: req.time
+    });
 });
 
 // Assets at the /assets route
